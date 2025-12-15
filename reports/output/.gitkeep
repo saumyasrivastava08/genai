@@ -1,0 +1,5 @@
+# Reports Output Directory
+
+This directory contains generated reports from the Multi-Task Text Utility.
+
+Reports are automatically saved here in JSON and CSV formats.
