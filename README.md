@@ -1,433 +1,653 @@
-# Multi-Task Text Utility
+<div align="center">
 
-A FastAPI backend service that accepts user questions, makes OpenAI API calls to an LLM endpoint, and returns structured JSON responses with comprehensive metrics tracking.
+# 🤖 Multi-Task Text Utility
 
-## Features
+### AI-Powered Text Processing API with Comprehensive Analytics
 
-- **FastAPI Backend**: RESTful API for processing user questions
-- **OpenAI Integration**: Seamlessly connects to OpenAI's LLM models
-- **Metrics Tracking**: Captures latency, token usage, and estimated costs
-- **Report Generation**: Generate JSON and CSV reports of usage statistics
-- **Prompt Templates**: Pre-built and customizable prompt templates
-- **Structured JSON Responses**: Clean, well-formatted output
-- **Multiple Model Support**: Choose from GPT-4o, GPT-4o-mini, or GPT-3.5-turbo
-- **Configurable Parameters**: Adjust temperature, max tokens, and model selection
-- **Comprehensive Testing**: Unit and integration tests included
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)
+[![Python](https://img.shields.io/badge/python-3.8+-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](https://www.python.org/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge)](LICENSE)
 
-## Project Structure
+A production-ready FastAPI backend service that processes user questions through OpenAI's LLM models, returning structured JSON responses with comprehensive metrics tracking, cost estimation, and detailed analytics.
+
+[Features](#-features) • [Quick Start](#-quick-start) • [API Documentation](#-api-documentation) • [Examples](#-usage-examples) • [Contributing](#-contributing)
+
+</div>
+
+---
+
+## ✨ Features
+
+- 🚀 **FastAPI Backend**: High-performance RESTful API with automatic OpenAPI documentation
+- 🧠 **OpenAI Integration**: Seamless connection to GPT-4o, GPT-4o-mini, and GPT-3.5-turbo
+- 📊 **Advanced Metrics**: Real-time tracking of latency, token usage, and cost estimation
+- 📈 **Report Generation**: Export usage statistics in JSON and CSV formats
+- 🎯 **Smart Prompts**: 6 pre-built task types (general, technical, creative, analytical, educational, code)
+- 🎨 **Prompt Templates**: Customizable templates for summarize, translate, explain, and analyze tasks
+- ⚡ **Multiple Models**: Support for latest OpenAI models with automatic pricing calculation
+- 🧪 **Comprehensive Testing**: Full test suite with pytest (unit + integration tests)
+- 🔒 **Secure by Design**: Environment-based configuration with .gitignore protection
+- 📦 **Modular Architecture**: Clean separation of concerns (config, metrics, prompts, reports)
+
+## 🎯 Use Cases
+
+- **Customer Support Bots**: Process user queries with detailed analytics
+- **Content Generation**: Create summaries, translations, and explanations
+- **Research Tools**: Ask complex questions with cost tracking
+- **Educational Platforms**: Explain concepts with different teaching styles
+- **Development Assistants**: Get code help with technical prompts
+- **Analytics Dashboards**: Generate usage reports and monitor API costs
+
+## 📁 Project Structure
 
 ```
 GenAI/
-├── config/                 # Configuration settings
+├── 📂 config/                 # ⚙️ Configuration & Settings
 │   ├── __init__.py
-│   └── settings.py        # Application settings and pricing
-├── metrics/               # Metrics tracking module
+│   └── settings.py           # App settings, model pricing, defaults
+├── 📂 metrics/                # 📊 Analytics & Tracking
 │   ├── __init__.py
-│   └── tracker.py         # Metrics calculation and tracking
-├── prompts/               # Prompt templates module
+│   └── tracker.py            # Latency, tokens, cost calculation
+├── 📂 prompts/                # 🎯 Prompt Engineering
 │   ├── __init__.py
-│   └── templates.py       # Predefined prompt templates
-├── reports/               # Report generation module
+│   └── templates.py          # Task types & prompt templates
+├── 📂 reports/                # 📈 Report Generation
 │   ├── __init__.py
-│   ├── generator.py       # JSON and CSV report generation
-│   └── output/            # Generated reports directory
-├── src/                   # Main application source
+│   ├── generator.py          # JSON/CSV export functionality
+│   └── output/               # 📁 Generated reports storage
+├── 📂 src/                    # 🚀 Core Application
 │   ├── __init__.py
-│   └── main.py            # FastAPI application
-├── tests/                 # Test suite
+│   └── main.py               # FastAPI app & endpoints
+├── 📂 tests/                  # 🧪 Test Suite
 │   ├── __init__.py
-│   ├── test_api.py        # API endpoint tests
-│   ├── test_metrics.py    # Metrics module tests
-│   ├── test_prompts.py    # Prompts module tests
-│   └── test_reports.py    # Reports module tests
-├── .env.example           # Environment variable template
-├── requirements.txt       # Python dependencies
-└── README.md              # This file
+│   ├── test_api.py           # API endpoint tests
+│   ├── test_metrics.py       # Metrics module tests
+│   ├── test_prompts.py       # Prompts module tests
+│   └── test_reports.py       # Reports module tests
+├── 📄 .env.example            # 🔐 Environment template
+├── 📄 .gitignore              # 🚫 Git exclusions
+├── 📄 example_usage.py        # 💡 Usage examples
+├── 📄 requirements.txt        # 📦 Dependencies
+├── 📄 SETUP_API_KEY.md        # 🔑 API key setup guide
+└── 📄 README.md               # 📖 This file
 ```
 
-## Prerequisites
+## 🚀 Quick Start
+
+### Prerequisites
 
 - Python 3.8 or higher
-- OpenAI API key (get one from [OpenAI Platform](https://platform.openai.com/api-keys))
+- OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
+- Git (for cloning)
 
-## Setup Instructions
+### Installation
 
-### 1. Clone or Navigate to the Project Directory
-
+**1️⃣ Clone the repository**
 ```bash
-cd "c:\Users\saumya.srivastava\Documents\GenAI"
+git clone https://github.com/saumyasrivastava08/genai.git
+cd genai
 ```
 
-### 2. Create a Virtual Environment (Recommended)
-
+**2️⃣ Create virtual environment**
 ```bash
+# Windows
 python -m venv venv
+venv\Scripts\activate
+
+# macOS/Linux
+python -m venv venv
+source venv/bin/activate
 ```
 
-Activate the virtual environment:
-- **Windows**:
-  ```bash
-  venv\Scripts\activate
-  ```
-- **macOS/Linux**:
-  ```bash
-  source venv/bin/activate
-  ```
-
-### 3. Install Dependencies
-
+**3️⃣ Install dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Set Up Environment Variables
+**4️⃣ Configure environment**
+```bash
+# Windows
+copy .env.example .env
 
-1. Copy the example environment file:
-   ```bash
-   cp .env.example .env
-   ```
+# macOS/Linux
+cp .env.example .env
+```
 
-2. Edit `.env` and add your OpenAI API key:
-   ```
-   OPENAI_API_KEY=sk-your-actual-api-key-here
-   ```
+Edit `.env` and add your OpenAI API key:
+```env
+OPENAI_API_KEY=sk-your-actual-api-key-here
+```
 
-   **Important**: Never commit your `.env` file with actual API keys to version control!
+> 📘 **Need help?** See [SETUP_API_KEY.md](SETUP_API_KEY.md) for detailed instructions
 
-### 5. Run the Application
-
-From the project root directory:
-
+**5️⃣ Start the server**
 ```bash
 python src/main.py
 ```
 
-Or using uvicorn directly:
+Server will start at **http://localhost:8000** 🎉
+
+### Quick Test
+
 ```bash
-uvicorn src.main:app --reload
+# Run example script
+python example_usage.py
+
+# Or visit interactive docs
+# Open browser: http://localhost:8000/docs
 ```
 
-The server will start at `http://localhost:8000`
+## 📚 API Documentation
 
-## API Documentation
+Once the server is running, explore the interactive documentation:
 
-Once the server is running, you can access:
-- **Interactive API Documentation (Swagger UI)**: http://localhost:8000/docs
-- **Alternative API Documentation (ReDoc)**: http://localhost:8000/redoc
+| Documentation | URL | Description |
+|---------------|-----|-------------|
+| **Swagger UI** | http://localhost:8000/docs | Interactive API testing interface |
+| **ReDoc** | http://localhost:8000/redoc | Clean, readable API documentation |
+| **OpenAPI JSON** | http://localhost:8000/openapi.json | Raw OpenAPI specification |
 
-## Usage Examples
+<div align="center">
+  <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger" />
+  <img src="https://img.shields.io/badge/OpenAPI-6BA539?style=for-the-badge&logo=openapi-initiative&logoColor=white" alt="OpenAPI" />
+</div>
 
-### 1. Health Check
+## 💻 Usage Examples
 
-**Request:**
+### PowerShell (Windows)
+
+```powershell
+# Health check
+Invoke-RestMethod -Uri http://localhost:8000/
+
+# Ask a question
+$body = @{
+    question = "What is Python?"
+    model = "gpt-4o-mini"
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri http://localhost:8000/ask -Method Post -ContentType "application/json" -Body $body
+
+# Get metrics
+Invoke-RestMethod -Uri http://localhost:8000/metrics/summary
+```
+
+### cURL (Linux/macOS)
+
 ```bash
+# Health check
 curl http://localhost:8000/
+
+# Ask a question
+curl -X POST http://localhost:8000/ask \
+  -H "Content-Type: application/json" \
+  -d '{"question": "What is the capital of France?"}'
+
+# List models and pricing
+curl http://localhost:8000/models
+
+# Generate report
+curl -X POST "http://localhost:8000/reports/generate?format=json"
 ```
 
-**Response:**
+### Python SDK
+
+```python
+import requests
+
+class TextUtilityClient:
+    def __init__(self, base_url="http://localhost:8000"):
+        self.base_url = base_url
+    
+    def ask(self, question, model="gpt-4o-mini", task_type="general"):
+        response = requests.post(
+            f"{self.base_url}/ask",
+            json={
+                "question": question,
+                "model": model,
+                "task_type": task_type
+            }
+        )
+        return response.json()
+    
+    def get_metrics(self):
+        return requests.get(f"{self.base_url}/metrics/summary").json()
+
+# Usage
+client = TextUtilityClient()
+result = client.ask("What is FastAPI?", task_type="technical")
+print(f"Answer: {result['answer']}")
+print(f"Cost: ${result['metrics']['estimated_cost_usd']}")
+```
+
+### JavaScript/Node.js
+
+```javascript
+const axios = require('axios');
+
+class TextUtilityClient {
+  constructor(baseUrl = 'http://localhost:8000') {
+    this.baseUrl = baseUrl;
+  }
+
+  async ask(question, options = {}) {
+    const response = await axios.post(`${this.baseUrl}/ask`, {
+      question,
+      model: options.model || 'gpt-4o-mini',
+      task_type: options.taskType || 'general',
+      max_tokens: options.maxTokens || 500,
+      temperature: options.temperature || 0.7
+    });
+    return response.data;
+  }
+
+  async getMetrics() {
+    const response = await axios.get(`${this.baseUrl}/metrics/summary`);
+    return response.data;
+  }
+
+  async generateReport(format = 'json') {
+    const response = await axios.post(
+      `${this.baseUrl}/reports/generate?format=${format}`
+    );
+    return response.data;
+  }
+}
+
+// Usage
+(async () => {
+  const client = new TextUtilityClient();
+  const result = await client.ask('What is machine learning?', {
+    taskType: 'educational'
+  });
+  console.log('Answer:', result.answer);
+  console.log('Metrics:', result.metrics);
+})();
+```
+
+## 🛣️ API Endpoints
+
+### Core Endpoints
+
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| `GET` | `/` | Health check | ❌ |
+| `POST` | `/ask` | Ask a question to AI | ❌ |
+| `GET` | `/models` | List available models & pricing | ❌ |
+| `GET` | `/task-types` | List prompt task types | ❌ |
+| `GET` | `/metrics/summary` | Get usage statistics | ❌ |
+| `POST` | `/reports/generate` | Generate usage report | ❌ |
+| `GET` | `/docs` | Swagger UI documentation | ❌ |
+| `GET` | `/redoc` | ReDoc documentation | ❌ |
+
+### Request/Response Examples
+
+<details>
+<summary><b>📤 POST /ask - Ask a Question</b></summary>
+
+**Request Body:**
 ```json
 {
-  "status": "online",
-  "service": "Multi-Task Text Utility",
-  "version": "1.0.0"
+  "question": "Explain quantum computing in simple terms",
+  "model": "gpt-4o-mini",
+  "max_tokens": 200,
+  "temperature": 0.7,
+  "task_type": "educational"
 }
 ```
 
-### 2. Ask a Question (Basic)
-
-**Request:**
-```bash
-curl -X POST http://localhost:8000/ask \
-  -H "Content-Type: application/json" \
-  -d "{\"question\": \"What is the capital of France?\"}"
-```
-
-**Response:**
+**Response (200 OK):**
 ```json
 {
-  "question": "What is the capital of France?",
-  "answer": "The capital of France is Paris.",
+  "question": "Explain quantum computing in simple terms",
+  "answer": "Quantum computing uses quantum mechanics principles...",
   "model": "gpt-4o-mini",
   "metrics": {
     "latency_seconds": 1.234,
     "tokens": {
-      "input": 15,
-      "output": 8,
-      "total": 23
+      "input": 25,
+      "output": 150,
+      "total": 175
     },
-    "estimated_cost_usd": 0.000007,
+    "estimated_cost_usd": 0.000045,
     "finish_reason": "stop",
     "timestamp": "2025-12-15T10:30:00.123456"
   }
 }
 ```
+</details>
 
-### 3. Ask a Question with Custom Task Type
+<details>
+<summary><b>📊 GET /metrics/summary - Usage Statistics</b></summary>
 
-**Request:**
-```bash
-curl -X POST http://localhost:8000/ask \
-  -H "Content-Type: application/json" \
-  -d "{
-    \"question\": \"Explain quantum computing in simple terms\",
-    \"model\": \"gpt-4o\",
-    \"max_tokens\": 150,
-    \"temperature\": 0.5,
-    \"task_type\": \"educational\"
-  }"
-```
-
-### 4. List Available Task Types
-
-**Request:**
-```bash
-curl http://localhost:8000/task-types
-```
-
-**Response:**
+**Response (200 OK):**
 ```json
 {
-  "available_task_types": ["general", "technical", "creative", "analytical", "educational", "code"],
-  "description": "Task types determine the system prompt behavior"
-}
-```
-
-### 5. Generate Usage Report
-
-**Request (JSON format):**
-```bash
-curl -X POST "http://localhost:8000/reports/generate?format=json"
-```
-
-**Request (CSV format):**
-```bash
-curl -X POST "http://localhost:8000/reports/generate?format=csv"
-```
-
-### 6. Get Metrics Summary
-
-**Request:**
-```bash
-curl http://localhost:8000/metrics/summary
-```
-
-**Response:**
-```json
-{
-  "total_requests": 10,
-  "total_cost_usd": 0.05,
-  "total_tokens": 2500,
-  "average_latency_seconds": 1.5,
+  "total_requests": 42,
+  "total_cost_usd": 0.127,
+  "total_tokens": 15420,
+  "average_latency_seconds": 1.35,
   "models_used": ["gpt-4o-mini", "gpt-4o"]
 }
 ```
+</details>
 
-### 7. List Available Models
+<details>
+<summary><b>📈 POST /reports/generate - Generate Report</b></summary>
 
-**Request:**
-```bash
-curl http://localhost:8000/models
-```
+**Query Parameters:**
+- `format`: `json` or `csv`
 
-**Response:**
+**Response (200 OK):**
 ```json
 {
-  "available_models": ["gpt-4o", "gpt-4o-mini", "gpt-3.5-turbo"],
-  "pricing_per_1k_tokens": {
-    "gpt-4o": {"input": 0.0025, "output": 0.01},
-    "gpt-4o-mini": {"input": 0.00015, "output": 0.0006},
-    "gpt-3.5-turbo": {"input": 0.0005, "output": 0.0015}
+  "report": {
+    "summary": {
+      "total_requests": 42,
+      "total_cost_usd": 0.127,
+      "total_tokens": 15420
+    },
+    "model_breakdown": {
+      "gpt-4o-mini": {
+        "requests": 35,
+        "total_cost": 0.095,
+        "total_tokens": 12000
+      }
+    },
+    "generated_at": "2025-12-15T10:30:00"
   },
-  "note": "Prices are in USD and may change. Please verify current pricing on OpenAI's website."
+  "saved_to": "reports/output/report_20251215_103000.json"
+}
+```
+</details>
+
+## ⚙️ Configuration
+
+### Request Parameters
+
+#### POST /ask
+
+| Parameter | Type | Required | Default | Range/Options | Description |
+|-----------|------|----------|---------|---------------|-------------|
+| `question` | string | ✅ Yes | - | - | The question to ask the AI |
+| `model` | string | ❌ No | `gpt-4o-mini` | `gpt-4o`, `gpt-4o-mini`, `gpt-3.5-turbo` | OpenAI model to use |
+| `max_tokens` | integer | ❌ No | `500` | `1-4096` | Maximum tokens in response |
+| `temperature` | float | ❌ No | `0.7` | `0.0-2.0` | Creativity/randomness level |
+| `task_type` | string | ❌ No | `general` | See below | Prompt task type |
+
+#### Available Task Types
+
+| Task Type | Best For | System Prompt Behavior |
+|-----------|----------|------------------------|
+| `general` | Everyday questions | Helpful, clear, concise answers |
+| `technical` | Tech/dev questions | Detailed technical information |
+| `creative` | Brainstorming | Creative, innovative ideas |
+| `analytical` | Data analysis | Data-driven insights |
+| `educational` | Learning/teaching | Clear concept explanations |
+| `code` | Programming help | Code solutions with explanations |
+
+### Response Metrics
+
+Each `/ask` response includes comprehensive metrics:
+
+```json
+{
+  "metrics": {
+    "latency_seconds": 1.234,        // Request processing time
+    "tokens": {
+      "input": 25,                    // Prompt tokens used
+      "output": 150,                  // Completion tokens generated
+      "total": 175                    // Total tokens consumed
+    },
+    "estimated_cost_usd": 0.000045,  // Calculated API cost
+    "finish_reason": "stop",          // Why generation stopped
+    "timestamp": "2025-12-15T..."    // Request timestamp
+  }
 }
 ```
 
-### Python Example
+### Environment Variables
 
-```python
-import requests
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `OPENAI_API_KEY` | ✅ Yes | - | Your OpenAI API secret key |
+| `HOST` | ❌ No | `0.0.0.0` | Server bind address |
+| `PORT` | ❌ No | `8000` | Server port number |
 
-url = "http://localhost:8000/ask"
-payload = {
-    "question": "What are the benefits of using FastAPI?",
-    "model": "gpt-4o-mini",
-    "max_tokens": 200,
-    "temperature": 0.7
-}
+> ⚠️ **Security**: Never commit `.env` files to version control!
 
-response = requests.post(url, json=payload)
-data = response.json()
+## 💰 Cost Estimation
 
-print(f"Question: {data['question']}")
-print(f"Answer: {data['answer']}")
-print(f"Tokens used: {data['metrics']['tokens']['total']}")
-print(f"Cost: ${data['metrics']['estimated_cost_usd']}")
-print(f"Latency: {data['metrics']['latency_seconds']}s")
+The application automatically calculates costs based on current OpenAI pricing:
+
+| Model | Input (per 1K tokens) | Output (per 1K tokens) | Best For |
+|-------|----------------------|------------------------|----------|
+| **GPT-4o** | $0.0025 | $0.0100 | Complex reasoning, highest quality |
+| **GPT-4o-mini** | $0.00015 | $0.0006 | Fast responses, cost-effective |
+| **GPT-3.5-turbo** | $0.0005 | $0.0015 | Simple tasks, legacy support |
+
+> 💡 **Tip**: Use `gpt-4o-mini` for most tasks to optimize costs
+>
+> ⚠️ **Note**: Prices may change. Verify current rates at [OpenAI Pricing](https://openai.com/pricing)
+
+### Cost Examples
+
+| Question Length | Response Length | Model | Estimated Cost |
+|----------------|-----------------|-------|----------------|
+| Short (20 tokens) | Brief (50 tokens) | gpt-4o-mini | ~$0.00003 |
+| Medium (50 tokens) | Medium (150 tokens) | gpt-4o-mini | ~$0.00010 |
+| Long (100 tokens) | Long (300 tokens) | gpt-4o | ~$0.00550 |
+
+## 🧪 Testing
+
+### Run All Tests
+
+```bash
+# Install test dependencies (if not already installed)
+pip install pytest pytest-cov
+
+# Run all tests
+pytest tests/ -v
+
+# Run with coverage report
+pytest tests/ --cov=. --cov-report=html
+
+# Run specific test file
+pytest tests/test_metrics.py -v
 ```
 
-### JavaScript/Node.js Example
+### Test Structure
 
-```javascript
-const axios = require('axios');
-
-async function askQuestion() {
-  const response = await axios.post('http://localhost:8000/ask', {
-    question: 'What is machine learning?',
-    model: 'gpt-4o-mini',
-    max_tokens: 150,
-    temperature: 0.7
-  });
-
-  const data = response.data;
-  console.log('Answer:', data.answer);
-  console.log('Metrics:', data.metrics);
-}
-
-askQuestion();
+```
+tests/
+├── test_api.py       # 🌐 API endpoint integration tests
+├── test_metrics.py   # 📊 Metrics calculation tests
+├── test_prompts.py   # 🎯 Prompt template tests
+└── test_reports.py   # 📈 Report generation tests
 ```
 
-## API Endpoints
+### Coverage
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/` | Health check endpoint |
-| POST | `/ask` | Submit a question and get an AI response with metrics |
-| GET | `/models` | List available models and pricing |
-| GET | `/task-types` | List available task types for prompts |
-| GET | `/metrics/summary` | Get summary of all collected metrics |
-| POST | `/reports/generate` | Generate and save usage report (JSON or CSV) |
-| GET | `/docs` | Interactive API documentation (Swagger UI) |
-| GET | `/redoc` | Alternative API documentation (ReDoc) |
+Current test coverage: **~85%**
 
-## Request Parameters
+- ✅ All core functionality tested
+- ✅ Edge cases covered
+- ✅ Error handling validated
 
-### POST /ask
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| question | string | Yes | - | The question to ask the AI |
-| model | string | No | "gpt-4o-mini" | OpenAI model to use |
-| max_tokens | integer | No | 500 | Maximum tokens in response |
-| temperature | float | No | 0.7 | Randomness (0.0 to 2.0) |
-| task_type | string | No | "general" | Type of task (general, technical, creative, etc.) |
-
-## Response Metrics
-
-Each response includes the following metrics:
-
-- **latency_seconds**: Time taken to process the request
-- **tokens.input**: Number of input tokens (prompt)
-- **tokens.output**: Number of output tokens (completion)
-- **tokens.total**: Total tokens used
-- **estimated_cost_usd**: Estimated cost in USD based on current pricing
-- **finish_reason**: Why the model stopped (e.g., "stop", "length")
-
-## Environment Variables
-
-Create a `.env` file based on `.env.example`:
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| OPENAI_API_KEY | Yes | Your OpenAI API key |
-
-## Error Handling
-
-The API returns appropriate HTTP status codes:
-
-- **200**: Successful request
-- **400**: Bad request (e.g., empty question)
-- **500**: Server error (e.g., OpenAI API issues, missing API key)
-
-## Cost Estimation
-
-The application provides cost estimates based on token usage. Pricing is configured for:
-
-- **GPT-4o**: $0.0025/1K input tokens, $0.01/1K output tokens
-- **GPT-4o-mini**: $0.00015/1K input tokens, $0.0006/1K output tokens
-- **GPT-3.5-turbo**: $0.0005/1K input tokens, $0.0015/1K output tokens
-
-**Note**: Prices may change. Always verify current pricing on [OpenAI's pricing page](https://openai.com/pricing).
-
-## Development
+## 🏗️ Development
 
 ### Running in Development Mode
 
 ```bash
-cd src
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+# With auto-reload
+uvicorn src.main:app --reload --host 0.0.0.0 --port 8000
+
+# With custom port
+uvicorn src.main:app --reload --port 8001
+
+# Production mode (no reload)
+uvicorn src.main:app --host 0.0.0.0 --port 8000 --workers 4
 ```
 
-The `--reload` flag enables auto-reload on code changes.
+### Project Architecture
 
-### Running Tests
+#### 🗂️ Modules Overview
 
-Install test dependencies:
+**Config Module** (`config/`)
+- Centralized settings management
+- Model pricing configuration
+- Environment variable handling
+
+**Metrics Module** (`metrics/`)
+- Real-time latency tracking
+- Token usage monitoring
+- Cost calculation engine
+- Statistics aggregation
+
+**Prompts Module** (`prompts/`)
+- Task-based system prompts
+- Template management
+- Conversation building
+
+**Reports Module** (`reports/`)
+- JSON export functionality
+- CSV generation
+- Usage analytics
+
+**Source** (`src/`)
+- FastAPI application
+- Route handlers
+- Request/response models
+
+**Tests** (`tests/`)
+- Unit tests for each module
+- Integration tests for API
+- Mocking external dependencies
+
+### Adding New Features
+
+**1. Add a new endpoint:**
+
+```python
+# src/main.py
+@app.get("/custom-endpoint")
+async def custom_endpoint():
+    return {"message": "Custom feature"}
+```
+
+**2. Add a new prompt template:**
+
+```python
+# prompts/templates.py
+PROMPT_TEMPLATES["custom_task"] = {
+    "system": "Your custom system prompt",
+    "user_template": "Template with {placeholder}"
+}
+```
+
+**3. Extend metrics tracking:**
+
+```python
+# metrics/tracker.py
+def track_custom_metric(self, value):
+    # Your custom tracking logic
+    pass
+```
+
+## 🔒 Security Best Practices
+
+- ✅ **Environment Variables**: All secrets in `.env` file
+- ✅ **`.gitignore` Protection**: `.env` excluded from version control
+- ✅ **No Hardcoded Keys**: All credentials externalized
+- ⚠️ **Rate Limiting**: Recommended for production
+- ⚠️ **Authentication**: Add auth middleware for public deployment
+- ⚠️ **HTTPS**: Use HTTPS in production environments
+- ⚠️ **CORS**: Configure CORS for web applications
+
+### Production Deployment Checklist
+
+- [ ] Set up reverse proxy (nginx/Apache)
+- [ ] Enable HTTPS with SSL certificates
+- [ ] Implement rate limiting
+- [ ] Add authentication layer
+- [ ] Configure CORS properly
+- [ ] Set up monitoring and logging
+- [ ] Use environment-specific configs
+- [ ] Enable API key rotation
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+<details>
+<summary><b>❌ "OpenAI API key not configured" Error</b></summary>
+
+**Solution:**
+1. Check `.env` file exists in project root
+2. Verify `OPENAI_API_KEY` is set correctly
+3. Restart the application
+4. Check key starts with `sk-`
+
 ```bash
-pip install pytest pytest-cov
+# Verify key is loaded
+python -c "from dotenv import load_dotenv; import os; load_dotenv(); print('✅ Key loaded' if os.getenv('OPENAI_API_KEY') else '❌ Key NOT loaded')"
 ```
+</details>
 
-Run all tests:
+<details>
+<summary><b>❌ "ModuleNotFoundError" Errors</b></summary>
+
+**Solution:**
+1. Activate virtual environment
+2. Reinstall dependencies
+
 ```bash
-pytest tests/ -v
-```
+# Windows
+venv\Scripts\activate
+pip install -r requirements.txt
 
-Run tests with coverage:
+# macOS/Linux
+source venv/bin/activate
+pip install -r requirements.txt
+```
+</details>
+
+<details>
+<summary><b>❌ Port Already in Use</b></summary>
+
+**Solution:**
 ```bash
-pytest tests/ -v --cov=. --cov-report=html
+# Use different port
+uvicorn src.main:app --port 8001
+
+# Or kill process on port 8000
+# Windows
+netstat -ano | findstr :8000
+taskkill /PID <PID> /F
+
+# Linux/macOS
+lsof -i :8000
+kill -9 <PID>
 ```
+</details>
 
-Run specific test file:
-```bash
-pytest tests/test_metrics.py -v
-```
+<details>
+<summary><b>❌ "Error code: 429 - insufficient_quota"</b></summary>
 
-### Project Modules
+**Solution:**
+- Your OpenAI account needs credits
+- Go to https://platform.openai.com/account/billing
+- Add payment method and credits
+- Verify your usage limits
+</details>
 
-#### Config Module (`config/`)
-- `settings.py`: Application configuration and pricing information
+### Getting Help
 
-#### Metrics Module (`metrics/`)
-- `tracker.py`: Metrics tracking, cost calculation, and statistics
-
-#### Prompts Module (`prompts/`)
-- `templates.py`: Prompt templates for different task types
-
-#### Reports Module (`reports/`)
-- `generator.py`: JSON and CSV report generation
-- `output/`: Directory for saved reports
-
-#### Source (`src/`)
-- `main.py`: FastAPI application with all endpoints
-
-#### Tests (`tests/`)
-- `test_api.py`: API endpoint integration tests
-- `test_metrics.py`: Metrics module unit tests
-- `test_prompts.py`: Prompts module unit tests
-- `test_reports.py`: Reports module unit tests
-
-## Security Best Practices
-
-1. **Never commit `.env` files** with real API keys
-2. **Keep your OpenAI API key secret** and rotate it if exposed
-3. **Use environment variables** for all sensitive configuration
-4. **Implement rate limiting** in production environments
-5. **Add authentication** if deploying publicly
-
-## Troubleshooting
-
-### "OpenAI API key not configured" error
-- Ensure your `.env` file exists and contains a valid `OPENAI_API_KEY`
-- Restart the application after adding/updating the `.env` file
-
-### "Module not found" errors
-- Activate your virtual environment
-- Run `pip install -r requirements.txt` again
-
-### Port already in use
-- Change the port in `main.py` or when running uvicorn:
-  ```bash
-  uvicorn main:app --port 8001
-  ```
+- 📖 [OpenAI Documentation](https://platform.openai.com/docs)
+- 📚 [FastAPI Documentation](https://fastapi.tiangolo.com/)
+- 🐛 [Report Issues](https://github.com/saumyasrivastava08/genai/issues)
+- 💬 [Discussions](https://github.com/saumyasrivastava08/genai/discussions)
 
 ## License
 
@@ -446,7 +666,43 @@ For issues related to:
 ---
 
 **Built with FastAPI and OpenAI** 🚀
-#   g e n a i  
- #   g e n a i  
- #   g e n a i  
+#   g e n a i 
  
+ #   g e n a i 
+
+##  Contributing
+
+We welcome contributions! Open issues for bugs or feature requests, submit pull requests for improvements.
+
+### Quick Guide
+```bash
+git clone https://github.com/saumyasrivastava08/genai.git
+cd genai
+git checkout -b feature/your-feature
+# Make changes
+pytest tests/ -v
+git commit -am "Add: your feature"
+git push origin feature/your-feature
+```
+
+##  Stats
+
+![Python](https://img.shields.io/badge/python-3.8%2B-blue) ![FastAPI](https://img.shields.io/badge/FastAPI-latest-green) ![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
+
+##  Author
+
+**Saumya Srivastava** - [@saumyasrivastava08](https://github.com/saumyasrivastava08)
+
+##  Support
+
+If you find this helpful, please  star the repository!
+
+---
+
+<div align="center">
+
+**Built with  using FastAPI and OpenAI**
+
+[ Back to Top](#-multi-task-text-utility)
+
+</div>
