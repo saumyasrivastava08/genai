@@ -397,25 +397,21 @@ This project is provided as-is for educational and development purposes.
 
 ## Contributing
 
-We welcome contributions! Open issues for bugs or feature requests, submit pull requests for improvements.
+We welcome contributions! To contribute:
 
-### Quick Guide
-
-```bash
-git clone https://github.com/saumyasrivastava08/genai.git
-cd genai
-git checkout -b feature/your-feature
-# Make changes
-pytest tests/ -v
-git commit -am "Add: your feature"
-git push origin feature/your-feature
-```
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Make your changes
+4. Run tests: `pytest tests/ -v`
+5. Commit changes: `git commit -am "Add: your feature"`
+6. Push to branch: `git push origin feature/your-feature`
+7. Open a pull request
 
 ---
 
-## Stats
+## License
 
-![Python](https://img.shields.io/badge/python-3.8%2B-blue) ![FastAPI](https://img.shields.io/badge/FastAPI-latest-green) ![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
+This project is provided as-is for educational and development purposes.
 
 ---
 
@@ -424,61 +420,5 @@ git push origin feature/your-feature
 **Saumya Srivastava** - [@saumyasrivastava08](https://github.com/saumyasrivastava08)
 
 ---
-
-## Support
-
-For issues related to:
-- **OpenAI API**: Check [OpenAI's documentation](https://platform.openai.com/docs)
-- **FastAPI**: Check [FastAPI documentation](https://fastapi.tiangolo.com/)
-
----
-
-**Built with FastAPI and OpenAI** �
-#   g e n a i 
- 
- #   g e n a i 
-
-##  Contributing
-
-We welcome contributions! Open issues for bugs or feature requests, submit pull requests for improvements.
-
-### Quick Guide
-```bash
-git clone https://github.com/saumyasrivastava08/genai.git
-cd genai
-git checkout -b feature/your-feature
-# Make changes
-pytest tests/ -v
-git commit -am "Add: your feature"
-git push origin feature/your-feature
-```
-
----
-
-## Stats
-
-![Python](https://img.shields.io/badge/python-3.8%2B-blue) ![FastAPI](https://img.shields.io/badge/FastAPI-latest-green) ![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
-
----
-
-## Author
-
-**Saumya Srivastava** - [@saumyasrivastava08](https://github.com/saumyasrivastava08)
-
----
-
-## Support
-
-If you find this helpful, please star the repository!
-
----
-
-<div align="center">
 
 **Built with FastAPI and OpenAI**
-
-[Back to Top](#multi-task-text-utility)
-
-</div>
-
-
